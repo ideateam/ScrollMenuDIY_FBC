@@ -1,9 +1,7 @@
 # ScrollMenuDIY_FBC
 -------------------------------------
 ![image](https://github.com/feibaichen/ScrollMenuDIY_FBC/blob/master/scroll2.gif)
--------------------------
 ![image](https://github.com/feibaichen/ScrollMenuDIY_FBC/blob/master/scroll1.gif)
--------------------------
 ![image](https://github.com/feibaichen/ScrollMenuDIY_FBC/blob/master/scroll3.png)
 ------------------------
 
