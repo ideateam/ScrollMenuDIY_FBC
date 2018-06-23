@@ -6,7 +6,10 @@
 -------------------------
 ![image](https://github.com/feibaichen/ScrollMenuDIY_FBC/blob/master/scroll3.png)
 ------------------------
+
+
 - (void)viewDidLoad {
+
             [super viewDidLoad];
             // Do any additional setup after loading the view, typically from a nib.
                
@@ -38,20 +41,27 @@
             }
 
         [self.view addSubview:scrollMenu.myPlusShowBackView];
+        
+
 }
-/*
-ScrollMenuDIYFBCDelgate  代理事件，根据需求可用可不用
-*/
--(void)MenuButtonIsReallyClick:(UISegmentedControl *)SegmentedC{
-                NSLog(@"v----selectedSegmentIndex = %ld",SegmentedC.selectedSegmentIndex);
-}
--(void)PlusButtonIsReallyClick:(UIButton *)button{
-                NSLog(@"v----PlusButtonIsReallyClick =%ld",button.tag);
-}
--(void)PlusShowViewInsideButtonIsReallyClick:(UIButton *)button{
-                NSLog(@"v----PlusShowViewInsideButtonIsReallyClick = %ld",button.tag);
-}
--(void)scrollToWhichMenu:(int)MenuSegmentIndex{
-                NSLog(@"v----scrollToWhichMenu = %d",MenuSegmentIndex);
-}
+       
+       /*
+        
+        ScrollMenuDIYFBCDelgate  代理事件，根据需求可用可不用
+        
+        */
+
+    -(void)MenuButtonIsReallyClick:(UISegmentedControl *)SegmentedC{
+    
+        NSLog(@"v----selectedSegmentIndex = %ld",SegmentedC.selectedSegmentIndex);
+    }
+    -(void)PlusButtonIsReallyClick:(UIButton *)button{
+        NSLog(@"v----PlusButtonIsReallyClick =%ld",button.tag);
+    }
+    -(void)PlusShowViewInsideButtonIsReallyClick:(UIButton *)button{
+        NSLog(@"v----PlusShowViewInsideButtonIsReallyClick = %ld",button.tag);
+    }
+    -(void)scrollToWhichMenu:(int)MenuSegmentIndex{
+        NSLog(@"v----scrollToWhichMenu = %d",MenuSegmentIndex);
+    }
 
