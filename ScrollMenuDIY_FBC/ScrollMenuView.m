@@ -95,33 +95,33 @@
     
     [UIView animateWithDuration:0.2 animations:^{
         //下划线的位置根据点击位置，变化位置
-        _mylineLable.frame = CGRectMake((btn.tag - 1000) * (weakSelf.mySegmentedC.frame.size.width/weakSelf.titleArray.count) + 5, weakSelf.mySegmentedC.frame.origin.y + weakSelf.mySegmentedC.frame.size.height - 5, weakSelf.mySegmentedC.frame.size.width/weakSelf.titleArray.count - 10, 2);
+        weakSelf.mylineLable.frame = CGRectMake((btn.tag - 1000) * (weakSelf.mySegmentedC.frame.size.width/weakSelf.titleArray.count) + 5, weakSelf.mySegmentedC.frame.origin.y + weakSelf.mySegmentedC.frame.size.height - 5, weakSelf.mySegmentedC.frame.size.width/weakSelf.titleArray.count - 10, 2);
         
-        if (_NumsOfMenu >= _titleArray.count) {
+        if (weakSelf.NumsOfMenu >= weakSelf.titleArray.count) {
             
             //显示的数量小于_titleArray.count的时候，不做处理，也即是不滚动
         }else{
             //菜单标题的位置偏移
-            if ((btn.tag-1000) >= _titleArray.count - (_NumsOfMenu/2)) {
+            if ((btn.tag-1000) >= weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2)) {
                 
-                if (_NumsOfMenu % 2 == 0) {
+                if (weakSelf.NumsOfMenu % 2 == 0) {
                     //如果是_NumsOfMenu是偶数
-                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((_titleArray.count - (_NumsOfMenu/2) - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu) + (MENUW/_NumsOfMenu) * 0.5, 0)];
+                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2) - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu) + (MENUW/weakSelf.NumsOfMenu) * 0.5, 0)];
                     
                 }else{
                     //如果是_NumsOfMenu是奇数
-                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((_titleArray.count - (_NumsOfMenu/2) - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu), 0)];
+                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2) - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu), 0)];
                 }
                 
                 
-            }else if((btn.tag - 1000) > (_NumsOfMenu/2) && (btn.tag - 1000) < _titleArray.count - (_NumsOfMenu/2)){
+            }else if((btn.tag - 1000) > (weakSelf.NumsOfMenu/2) && (btn.tag - 1000) < weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2)){
                 
                 //如果是_NumsOfMenu是偶数
-                if (_NumsOfMenu % 2 == 0) {
-                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake(((btn.tag-1000)-(_NumsOfMenu/2)) * (MENUW/_NumsOfMenu) + (MENUW/_NumsOfMenu) * 0.5, 0)];
+                if (weakSelf.NumsOfMenu % 2 == 0) {
+                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake(((btn.tag-1000)-(weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu) + (MENUW/weakSelf.NumsOfMenu) * 0.5, 0)];
                 }else{
                     //如果是_NumsOfMenu是奇数
-                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake(((btn.tag-1000)-(_NumsOfMenu/2)) * (MENUW/_NumsOfMenu), 0)];
+                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake(((btn.tag-1000)-(weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu), 0)];
                 }
                 
             }else{
@@ -150,36 +150,36 @@
         
         weakSelf.mylineLable.frame = CGRectMake(sgc.selectedSegmentIndex * (sgc.frame.size.width/weakSelf.titleArray.count) + 5, sgc.frame.origin.y + sgc.frame.size.height - 5, sgc.frame.size.width/weakSelf.titleArray.count - 10, 2);
         
-        if (_NumsOfMenu >= _titleArray.count) {
+        if (weakSelf.NumsOfMenu >= weakSelf.titleArray.count) {
             
             //显示的数量小于_titleArray.count的时候，不做处理，也即是不滚动
         }else{
-            if (sgc.selectedSegmentIndex >= _titleArray.count - (_NumsOfMenu/2)) {
+            if (sgc.selectedSegmentIndex >= weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2)) {
                 
-                if (_NumsOfMenu % 2 == 0) {
+                if (weakSelf.NumsOfMenu % 2 == 0) {
                     //如果是_NumsOfMenu是偶数
-                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((_titleArray.count - (_NumsOfMenu/2) - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu) + (MENUW/_NumsOfMenu) * 0.5, 0)];
+                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2) - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu) + (MENUW/weakSelf.NumsOfMenu) * 0.5, 0)];
                 }else{
                     //如果是_NumsOfMenu是奇数
-                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((_titleArray.count - (_NumsOfMenu/2) - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu), 0)];
+                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2) - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu), 0)];
                 }
                 
-            }else if(sgc.selectedSegmentIndex > (_NumsOfMenu/2) && sgc.selectedSegmentIndex < _titleArray.count - (_NumsOfMenu/2)){
+            }else if(sgc.selectedSegmentIndex > (weakSelf.NumsOfMenu/2) && sgc.selectedSegmentIndex < weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2)){
                 
-                if (_NumsOfMenu % 2 == 0) {
+                if (weakSelf.NumsOfMenu % 2 == 0) {
                     //如果是_NumsOfMenu是偶数
-                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((sgc.selectedSegmentIndex - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu) + (MENUW/_NumsOfMenu) * 0.5, 0)];
+                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((sgc.selectedSegmentIndex - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu) + (MENUW/weakSelf.NumsOfMenu) * 0.5, 0)];
                 }else{
                     //如果是_NumsOfMenu是奇数
-                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((sgc.selectedSegmentIndex - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu), 0)];
+                    [weakSelf.menuBackScrollView setContentOffset:CGPointMake((sgc.selectedSegmentIndex - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu), 0)];
                 }
                 
             }else{
                 //如果是_NumsOfMenu是偶数
-                if (_NumsOfMenu % 2 == 0) {
+                if (weakSelf.NumsOfMenu % 2 == 0) {
                     
-                    if (sgc.selectedSegmentIndex == _NumsOfMenu/2) {
-                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((sgc.selectedSegmentIndex - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu) + (MENUW/_NumsOfMenu) * 0.5, 0)];
+                    if (sgc.selectedSegmentIndex == weakSelf.NumsOfMenu/2) {
+                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((sgc.selectedSegmentIndex - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu) + (MENUW/weakSelf.NumsOfMenu) * 0.5, 0)];
                     }else{
                         [weakSelf.menuBackScrollView setContentOffset:CGPointMake(0, 0)];
                     }
@@ -218,27 +218,27 @@
             
             weakSelf.mylineLable.frame = CGRectMake(n * (weakSelf.mySegmentedC.frame.size.width/weakSelf.titleArray.count) + 5, weakSelf.mySegmentedC.frame.origin.y + weakSelf.mySegmentedC.frame.size.height - 5, weakSelf.mySegmentedC.frame.size.width/weakSelf.titleArray.count - 10, 2);
             
-            if (_NumsOfMenu >= _titleArray.count) {
+            if (weakSelf.NumsOfMenu >= weakSelf.titleArray.count) {
                 
                 //显示的数量小于_titleArray.count的时候，不做处理，也即是不滚动
             }else{
                 
-                if (n > 2 && n < _titleArray.count - (_NumsOfMenu/2)) {
+                if (n > 2 && n < weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2)) {
                     //如果是_NumsOfMenu是偶数
-                    if (_NumsOfMenu % 2 == 0) {
-                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((n - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu) + (MENUW/_NumsOfMenu) * 0.5, 0)];
+                    if (weakSelf.NumsOfMenu % 2 == 0) {
+                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((n - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu) + (MENUW/weakSelf.NumsOfMenu) * 0.5, 0)];
                     }else{
                         //如果是_NumsOfMenu是奇数
-                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((n - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu), 0)];
+                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((n - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu), 0)];
                     }
                     
-                }else if(n >= _titleArray.count - (_NumsOfMenu/2)){
+                }else if(n >= weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2)){
                     //如果是_NumsOfMenu是偶数
-                    if (_NumsOfMenu % 2 == 0) {
-                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((_titleArray.count - (_NumsOfMenu/2) - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu) + (MENUW/_NumsOfMenu) * 0.5, 0)];
+                    if (weakSelf.NumsOfMenu % 2 == 0) {
+                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2) - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu) + (MENUW/weakSelf.NumsOfMenu) * 0.5, 0)];
                     }else{
                         //如果是_NumsOfMenu是奇数
-                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((_titleArray.count - (_NumsOfMenu/2) - (_NumsOfMenu/2)) * (MENUW/_NumsOfMenu), 0)];
+                        [weakSelf.menuBackScrollView setContentOffset:CGPointMake((weakSelf.titleArray.count - (weakSelf.NumsOfMenu/2) - (weakSelf.NumsOfMenu/2)) * (MENUW/weakSelf.NumsOfMenu), 0)];
                     }
                 }else{
                     [weakSelf.menuBackScrollView setContentOffset:CGPointMake(0, 0)];
