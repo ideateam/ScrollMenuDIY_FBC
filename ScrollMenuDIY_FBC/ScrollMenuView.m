@@ -268,6 +268,16 @@
         _mySegmentedC = [[UISegmentedControl alloc] initWithItems:_titleArray];
         //添加点击方法 添加事件
         [_mySegmentedC addTarget:self action:@selector(SegmentOnClick:) forControlEvents:UIControlEventValueChanged];
+        
+        //判断是否赋了新值，赋了新值则调用自定义的宽_menuW
+        if (_menuW == 0) {
+            
+            _mySegmentedC.frame=CGRectMake(10, 0, _titleArray.count * (MENUW/_NumsOfMenu)-20, 44);
+        }else{
+            
+            _mySegmentedC.frame=CGRectMake((MENUW - _menuW)/2, 0, _titleArray.count * (_menuW/_NumsOfMenu)-20, 44);
+        }
+        
         _mySegmentedC.frame=CGRectMake(10, 0, _titleArray.count * (MENUW/_NumsOfMenu)-20, 44);
         //默认颜色
         [_mySegmentedC setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor],NSFontAttributeName:[UIFont systemFontOfSize:15.0f]} forState:UIControlStateNormal];

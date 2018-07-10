@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define MENUW self.bounds.size.width
+#define MENUW [UIScreen mainScreen].bounds.size.width
 #define SCW [UIScreen mainScreen].bounds.size.width
 #define SCH [UIScreen mainScreen].bounds.size.height
 
@@ -23,6 +23,7 @@
 
 @interface ScrollMenuView : UIView<UIScrollViewDelegate>
 @property (nonatomic,strong) UISegmentedControl *mySegmentedC;//使用UISegmentedControl分段来实现的菜单联动
+@property (nonatomic,assign) float menuW;//用于自定义mySegmentedC的宽,初始化赋新值后仅仅用于无需滑动菜单的时候，不赋新值则调用默认宽
 @property (nonatomic,strong) UIScrollView *menuBackScrollView;//ISegmentedControl的父视图，目的是实现可任意滚动
 @property (nonatomic,strong) NSArray * titleArray;//标题数组
 @property (nonatomic,assign) CGRect MenuFrame;//菜单的位置布局
