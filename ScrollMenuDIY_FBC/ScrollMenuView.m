@@ -86,13 +86,19 @@
 }
 //点击弹窗视图的按钮跳转菜单对应滚动
 -(void)clickBTN:(UIButton *)btn{
-    NSLog(@"-----------%ld---------",btn.tag);
+    NSLog(@"-----------%ld---------",(long)btn.tag);
     
     [_mySegmentedC setSelectedSegmentIndex:btn.tag - 1000];
     
     self.myPlusShowBackView.hidden = YES;
     
-    [_contentScrollView setContentOffset:CGPointMake((btn.tag - 1000) * SCW, 0)];
+    if (self.ScrollViewContentDirectionstate == FBScrollHorizontal) {
+        
+        [_contentScrollView setContentOffset:CGPointMake((btn.tag - 1000) * SCW, 0)];
+    }else{
+        [_contentScrollView setContentOffset:CGPointMake(0, (btn.tag - 1000) * SCH)];
+    }
+    
     
     __weak __typeof(self) weakSelf = self;
     
