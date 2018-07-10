@@ -12,7 +12,10 @@
 #define SCW [UIScreen mainScreen].bounds.size.width
 #define SCH [UIScreen mainScreen].bounds.size.height
 
-
+typedef enum : NSUInteger {
+    FBScrollHorizontal = 1,
+    FBScrollVertical = 2,
+} FBScrollDircetion;
 
 @protocol ScrollMenuDIYFBCDelgate<NSObject>
 -(void)MenuButtonIsReallyClick:(UISegmentedControl *)SegmentedC;
@@ -23,12 +26,14 @@
 
 @interface ScrollMenuView : UIView<UIScrollViewDelegate>
 @property (nonatomic,strong) UISegmentedControl *mySegmentedC;//使用UISegmentedControl分段来实现的菜单联动
-@property (nonatomic,assign) float menuW;//用于自定义mySegmentedC的宽,初始化赋新值后仅仅用于无需滑动菜单的时候，不赋新值则调用默认宽
+@property (nonatomic,assign) float menuW;//用于自定义mySegmentedC的宽
 @property (nonatomic,strong) UIScrollView *menuBackScrollView;//ISegmentedControl的父视图，目的是实现可任意滚动
 @property (nonatomic,strong) NSArray * titleArray;//标题数组
 @property (nonatomic,assign) CGRect MenuFrame;//菜单的位置布局
 @property (nonatomic,assign) int NumsOfMenu;//可视的菜单数量（非总共的菜单标题数量）
 @property (nonatomic,assign) CGRect ScrollViewContentFrame;//滚动内容页面位置布局
+@property (nonatomic,assign) BOOL ScrollViewContentPagingEnabled;//滚动内容页面滚动方向
+@property (nonatomic,assign) FBScrollDircetion ScrollViewContentDirectionstate;//接收滚动方向状态
 @property (nonatomic,strong) UIScrollView *contentScrollView;//滚动内容页面
 @property (nonatomic,strong) UILabel * mylineLable;//菜单的下划线
 @property (nonatomic,strong) UIButton * plusMenuBTN;//菜单右侧的加号“+”
@@ -38,7 +43,7 @@
 @property (nonatomic,strong) id<ScrollMenuDIYFBCDelgate> delegate;
 
 //初始化滚动内容ScrollView
--(void)ScrollViewContent:(CGRect)ScrollViewContentFrame;
+-(void)ScrollViewContent:(CGRect)ScrollViewContentFrame andScrollDirection:(FBScrollDircetion)ScrollDircetion andPagingEnabled:(BOOL)yesOrNot;
 //初始化菜单标题scrollMenu
 -(void)initScrollMenuFrame:(CGRect)MenuFrame andTitleArray:(NSArray *)myTitleArray andDisplayNumsOfMenu:(int)Num;
 @end

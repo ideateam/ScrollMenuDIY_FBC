@@ -17,7 +17,7 @@
         把滚动内容页面放在任何一个地方，
         联动效果丝毫不影响
          */
-        
+        _menuW = 0;
     }
     return self;
 }
@@ -63,10 +63,13 @@
     [self.myPlusShowBackView addSubview:self.myPlusShowView];
 }
 //内容页面的翻页
--(void)ScrollViewContent:(CGRect)ScrollViewContentFrame{
+-(void)ScrollViewContent:(CGRect)ScrollViewContentFrame andScrollDirection:(FBScrollDircetion)ScrollDircetion andPagingEnabled:(BOOL)yesOrNot{
     
+    self.ScrollViewContentDirectionstate = ScrollDircetion;
+    self.ScrollViewContentPagingEnabled = yesOrNot;
     self.contentScrollView.frame = ScrollViewContentFrame;
     
+    //NSLog(@"ScrollViewContentDirectionstate = %lu",(unsigned long)self.ScrollViewContentDirectionstate);
 }
 //点击空白隐藏背景
 -(void)tapHideView{
@@ -138,10 +141,17 @@
 //Segment的点击事件
 -(void)SegmentOnClick:(UISegmentedControl *)sgc{
 
-    NSLog(@"st.selectIndex = %ld",sgc.selectedSegmentIndex);
+    //NSLog(@"st.selectIndex = %ld",sgc.selectedSegmentIndex);
     
+    //滚动方向
+    if (_ScrollViewContentDirectionstate == FBScrollHorizontal) {
+        
+        [_contentScrollView setContentOffset:CGPointMake(sgc.selectedSegmentIndex * SCW, 0)];
+    }else{
+        [_contentScrollView setContentOffset:CGPointMake(0, sgc.selectedSegmentIndex * SCH)];
+    }
     
-    [_contentScrollView setContentOffset:CGPointMake(sgc.selectedSegmentIndex * SCW, 0)];
+    //[_contentScrollView setContentOffset:CGPointMake(sgc.selectedSegmentIndex * SCW, 0)];
     
     __weak __typeof(self) weakSelf = self;
     
@@ -204,9 +214,18 @@
     
     if (scrollView == self.contentScrollView) {
         
-        int n=(scrollView.contentOffset.x/SCW);
-        
-        NSLog(@"n===%d",n);
+        int n = 0;
+        //滚动方向
+        if (self.ScrollViewContentDirectionstate == FBScrollHorizontal) {
+            
+            n=(scrollView.contentOffset.x/SCW);
+            
+        }else{
+            
+            n=(scrollView.contentOffset.y/SCH);
+        }
+    
+        //NSLog(@"n===%d",n);
         
         __weak __typeof(self) weakSelf = self;
         
@@ -269,7 +288,6 @@
         //添加点击方法 添加事件
         [_mySegmentedC addTarget:self action:@selector(SegmentOnClick:) forControlEvents:UIControlEventValueChanged];
         
-        //判断是否赋了新值，赋了新值则调用自定义的宽_menuW
         if (_menuW == 0) {
             
             _mySegmentedC.frame=CGRectMake(10, 0, _titleArray.count * (MENUW/_NumsOfMenu)-20, 44);
@@ -278,7 +296,6 @@
             _mySegmentedC.frame=CGRectMake((MENUW - _menuW)/2, 0, _titleArray.count * (_menuW/_NumsOfMenu)-20, 44);
         }
         
-        _mySegmentedC.frame=CGRectMake(10, 0, _titleArray.count * (MENUW/_NumsOfMenu)-20, 44);
         //默认颜色
         [_mySegmentedC setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor],NSFontAttributeName:[UIFont systemFontOfSize:15.0f]} forState:UIControlStateNormal];
         //点击后的颜色
@@ -361,13 +378,23 @@
     
     if (!_contentScrollView) {
         _contentScrollView = [[UIScrollView alloc] init];
-        _contentScrollView.contentSize = CGSizeMake(SCW * _titleArray.count, SCH );
+        
+        //contentScrollView滚动方向
+        if (self.ScrollViewContentDirectionstate == FBScrollHorizontal) {
+           
+            _contentScrollView.contentSize = CGSizeMake(SCW * _titleArray.count, SCH );
+            
+        }else{
+            
+            _contentScrollView.contentSize = CGSizeMake(SCW, SCH * _titleArray.count);
+        }
+    
         _contentScrollView.contentOffset = CGPointMake(0 , 0);
         _contentScrollView.bounces = NO;
         _contentScrollView.showsVerticalScrollIndicator = NO;
         _contentScrollView.showsHorizontalScrollIndicator = YES;
         _contentScrollView.delegate = self;
-        _contentScrollView.pagingEnabled = YES;
+        _contentScrollView.pagingEnabled = _ScrollViewContentPagingEnabled;
     }
     return _contentScrollView;
 }

@@ -32,7 +32,7 @@
     //初始化菜单栏
     [scrollMenu initScrollMenuFrame:CGRectMake(0, 0, SCREENW, 44) andTitleArray:array andDisplayNumsOfMenu:6];
     //初始化内容翻页
-    [scrollMenu ScrollViewContent:CGRectMake(0, 0, SCREENW, SCREENH)];
+    [scrollMenu ScrollViewContent:CGRectMake(0, 0, SCREENW, SCREENH) andScrollDirection:FBScrollVertical andPagingEnabled:YES];
     
     [self.navigationController.navigationBar addSubview:scrollMenu];//添加菜单栏
     [self.navigationController.navigationBar addSubview:scrollMenu.plusMenuBTN];//添加加号按钮
@@ -40,15 +40,32 @@
     //添加滚动内容页面到指定视图
     [self.view addSubview:scrollMenu.contentScrollView];
     
-    //添加子视图，请求数据
-    for (int i = 0 ; i < array.count; i++) {
-        MainViewController *vc = [[MainViewController alloc]init];
-        vc.view.frame=CGRectMake(i * SCREENW, 0, SCREENW, SCREENH);
-        [vc postNetWorkingWithTitle:array[i]];//传递请求数据
-        [scrollMenu.contentScrollView addSubview:vc.view];
-        [self addChildViewController:vc];
+    
+    if (scrollMenu.ScrollViewContentDirectionstate == FBScrollVertical) {
         
+        //添加子视图，请求数据
+        for (int i = 0 ; i < array.count; i++) {
+            MainViewController *vc = [[MainViewController alloc]init];
+            vc.view.frame=CGRectMake(0, i * SCREENH, SCREENW, SCREENH);
+            [vc postNetWorkingWithTitle:array[i]];//传递请求数据
+            [scrollMenu.contentScrollView addSubview:vc.view];
+            [self addChildViewController:vc];
+            
+        }
+        
+    }else{
+        
+        //添加子视图，请求数据
+        for (int i = 0 ; i < array.count; i++) {
+            MainViewController *vc = [[MainViewController alloc]init];
+            vc.view.frame=CGRectMake(i * SCREENW, 0, SCREENW, SCREENH);
+            [vc postNetWorkingWithTitle:array[i]];//传递请求数据
+            [scrollMenu.contentScrollView addSubview:vc.view];
+            [self addChildViewController:vc];
+            
+        }
     }
+    
     
     [self.view addSubview:scrollMenu.myPlusShowBackView];
 }
